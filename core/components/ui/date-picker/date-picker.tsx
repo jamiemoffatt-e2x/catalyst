@@ -24,6 +24,7 @@ const Calendar = ({ ...props }: ComponentPropsWithoutRef<typeof DayPicker>) => {
         cell: 'relative flex h-10 w-10 items-center justify-center p-0 text-center text-xs font-normal focus-within:relative focus-within:z-20 focus-within:rounded focus-within:border focus-within:border-primary/20',
         day: 'h-8 w-8 p-0 text-base hover:bg-secondary/10 focus-visible:outline-none aria-selected:bg-primary aria-selected:text-white aria-selected:hover:bg-primary aria-selected:hover:text-white',
 
+<<<<<<< HEAD
         day_today: 'bg-secondary/10',
         day_disabled: 'text-gray-400 aria-selected:bg-gray-100 aria-selected:text-white',
       }}
@@ -39,6 +40,9 @@ const Calendar = ({ ...props }: ComponentPropsWithoutRef<typeof DayPicker>) => {
 Calendar.displayName = 'Calendar';
 
 type Props = Omit<InputProps, 'defaultValue'> & {
+=======
+type DatePickerProps = Omit<InputProps, 'defaultValue' | 'onSelect'> & {
+>>>>>>> b5c776d0 (feat(core): add custom date field for account & address forms)
   defaultValue?: string | Date;
   selected?: DayPickerSingleProps['selected'];
   onSelect?: DayPickerSingleProps['onSelect'];
@@ -66,6 +70,7 @@ const DatePicker = forwardRef<ElementRef<'input'>, Props>(
     const formattedDate = date ? Intl.DateTimeFormat().format(date) : undefined;
 
     return (
+<<<<<<< HEAD
       <PopoverPrimitive.Root>
         <PopoverPrimitive.Trigger asChild>
           <Input
@@ -85,6 +90,25 @@ const DatePicker = forwardRef<ElementRef<'input'>, Props>(
             className="z-50 bg-white p-4 text-base shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
             sideOffset={4}
           >
+=======
+      <div ref={ref}>
+        <Popover>
+          <PopoverTrigger asChild>
+            <Input
+              placeholder={placeholder}
+              readOnly={!required}
+              required={required}
+              type="text"
+              value={formattedSelected ?? formattedDate ?? ''}
+              {...props}
+            >
+              <InputIcon>
+                <CalendarIcon />
+              </InputIcon>
+            </Input>
+          </PopoverTrigger>
+          <PopoverContent align="start" className="w-auto p-0">
+>>>>>>> b5c776d0 (feat(core): add custom date field for account & address forms)
             <Calendar
               disabled={disabledDays}
               initialFocus
