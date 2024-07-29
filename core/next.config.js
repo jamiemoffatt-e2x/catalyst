@@ -3,11 +3,7 @@ const createNextIntlPlugin = require('next-intl/plugin');
 
 const withNextIntl = createNextIntlPlugin();
 
-const cspHeader = `
-  base-uri 'self';
-  form-action 'self';
-  frame-ancestors 'none';
-`;
+const { cspHeader } = require('./lib/content-security-policy');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -21,6 +17,18 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: !!process.env.CI,
     dirs: ['app', 'client', 'components', 'lib', 'middlewares'],
+  },
+  webpack: (config) => {
+    if (process.env.NODE_V8_COVERAGE) {
+      Object.defineProperty(config, 'devtool', {
+        get() {
+          return 'source-map';
+        },
+        set() {},
+      });
+    }
+
+    return config;
   },
   // default URL generation in BigCommerce uses trailing slash
   trailingSlash: process.env.TRAILING_SLASH !== 'false',
