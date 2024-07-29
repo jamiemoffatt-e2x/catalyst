@@ -1,7 +1,9 @@
 import { faker } from '@faker-js/faker';
-import { expect, test } from '@playwright/test';
+import { expect } from '@playwright/test';
 
-const password = faker.internet.password({ length: 10 });
+import { test } from '~/tests/fixtures';
+
+const password = faker.internet.password({ pattern: /[a-zA-Z0-9]/, length: 10 });
 
 test('Account register', async ({ page }) => {
   await page.goto('/login');
