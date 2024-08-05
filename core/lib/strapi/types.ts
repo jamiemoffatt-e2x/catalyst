@@ -1,8 +1,8 @@
 type PostsListParams = {
     tagId?: string;
     limit?: number;
-    before?: number;
-    after?: number;
+    before?: string;
+    after?: string;
     locale?: string;
   };
   

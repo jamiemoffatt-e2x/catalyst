@@ -14,8 +14,8 @@ interface Props {
   searchParams: Record<string, string | string[] | undefined>;
 }
 
-export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
-  const blogPosts = await getBlogPosts(searchParams);
+export async function generateMetadata({ params: { locale }, searchParams }: Props): Promise<Metadata> {
+  const blogPosts = await getBlogPosts({ ...searchParams, locale });
 
   const title = blogPosts?.name ?? 'Blog';
 
@@ -25,7 +25,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
 }
 
 export default async function BlogPostPage({ params: { locale }, searchParams }: Props) {
-  const blogPosts = await getBlogPosts(searchParams);
+  const blogPosts = await getBlogPosts({ ...searchParams, locale });
   const t = await getTranslations({ locale, namespace: 'Pagination' });
 
   if (!blogPosts) {

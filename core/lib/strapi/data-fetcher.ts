@@ -1,6 +1,6 @@
 export async function getNewsPosts(searchParams: PostsListParams) {
     const { tagId, limit = 9, before, after = 0, locale = 'en' } = searchParams;
-    const start = before ? before - limit : after;
+    const start = before ? parseInt(before) - limit : after;
     const filter = tagId ? `&filters[tags][title][$eq]=${tagId}` : '';
   
     const apiResponse = await fetchStrapiData({
