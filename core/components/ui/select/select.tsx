@@ -5,6 +5,7 @@ import {
   ComponentPropsWithRef,
   ElementRef,
   forwardRef,
+  ReactNode,
   useId,
 } from 'react';
 
@@ -19,7 +20,7 @@ interface Props extends ComponentPropsWithRef<typeof SelectPrimitive.Root> {
   className?: string;
   id?: string;
   options: Options[];
-  placeholder?: string;
+  placeholder?: string | ReactNode;
   variant?: 'success' | 'error';
 }
 
@@ -44,7 +45,10 @@ const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Props>(
           id={triggerId}
           ref={ref}
         >
-          <SelectPrimitive.Value placeholder={placeholder} />
+          <SelectPrimitive.Value
+            asChild={typeof placeholder !== 'string'}
+            placeholder={placeholder}
+          />
           <SelectPrimitive.Icon>
             <ChevronDown className="inline group-focus-visible:text-primary group-enabled:group-hover:text-primary" />
           </SelectPrimitive.Icon>
