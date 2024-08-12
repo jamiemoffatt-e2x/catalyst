@@ -38,7 +38,7 @@ const Calendar = ({ ...props }: ComponentPropsWithoutRef<typeof DayPicker>) => {
 
 Calendar.displayName = 'Calendar';
 
-type Props = Omit<InputProps, 'defaultValue'> & {
+type Props = Omit<InputProps, 'defaultValue' | 'onSelect'> & {
   defaultValue?: string | Date;
   selected?: DayPickerSingleProps['selected'];
   onSelect?: DayPickerSingleProps['onSelect'];
@@ -71,7 +71,7 @@ const DatePicker = forwardRef<ElementRef<'input'>, Props>(
           <Input
             icon={<CalendarIcon />}
             placeholder={placeholder}
-            readOnly={true}
+            readOnly={!required}
             ref={ref}
             required={required}
             type="text"

@@ -45,10 +45,7 @@ const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Props>(
           id={triggerId}
           ref={ref}
         >
-          <SelectPrimitive.Value
-            asChild={typeof placeholder !== 'string'}
-            placeholder={placeholder}
-          />
+          <SelectPrimitive.Value placeholder={placeholder} />
           <SelectPrimitive.Icon>
             <ChevronDown className="inline group-focus-visible:text-primary group-enabled:group-hover:text-primary" />
           </SelectPrimitive.Icon>
